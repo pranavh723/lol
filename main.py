@@ -19,8 +19,8 @@ import os
 # Configuration
 BOT_TOKEN = '7559565798:AAHYgM8THCJKLaBPxUL-ZK-w_qZBJQRD754'
 
-OWNER_ID =  7913739894 
-admin =   6985505204 
+OWNER_ID = 7913739894
+
 # Initialize bot
 API_ID = '22209926'
 API_HASH = '04ee2355de0883331fa6168dfb6e9b24'
@@ -45,7 +45,7 @@ REPORT_REASONS = {
 
 @bot.on(events.NewMessage(pattern='/start'))
 async def start_handler(event):
-    if event.sender_id != OWNER_ID or  admin:
+    if event.sender_id != OWNER_ID or 6985505204:
         await event.respond("You are not authorized to use this bot.")
         return
 
@@ -59,14 +59,14 @@ async def start_handler(event):
 
 @bot.on(events.NewMessage(pattern='^➕ Add Account$'))
 async def add_account_handler(event):
-    if event.sender_id != OWNER_ID or admin :
+    if event.sender_id != OWNER_ID or 6985505204:
         return
     user_states[event.sender_id] = {'state': 'waiting_phone'}
     await event.respond("Please send the phone number (format: +1234567890)")
 
 @bot.on(events.NewMessage(pattern='^📊 Accounts Status$'))
 async def accounts_status_handler(event):
-    if event.sender_id != OWNER_ID or admin:
+    if event.sender_id != OWNER_ID:
         return
 
     if not clients:
@@ -81,7 +81,7 @@ async def accounts_status_handler(event):
 
 @bot.on(events.NewMessage(pattern='^❌ Remove Account$'))
 async def remove_account_handler(event):
-    if event.sender_id != OWNER_ID or admin :
+    if event.sender_id != OWNER_ID or 6985505204:
         return
 
     if not clients:
@@ -93,7 +93,7 @@ async def remove_account_handler(event):
 
 @bot.on(events.NewMessage(pattern='^❌ \+\d+$'))
 async def handle_remove_selection(event):
-    if event.sender_id != OWNER_ID or admin:
+    if event.sender_id != OWNER_ID or 6985505204:
         return
     phone = event.text[2:]
     if phone in clients:
@@ -104,7 +104,7 @@ async def handle_remove_selection(event):
 
 @bot.on(events.NewMessage(pattern='^🎯 Start Mass Report$'))
 async def start_report_handler(event):
-    if event.sender_id != OWNER_ID or admin:
+    if event.sender_id != OWNER_ID or 6985505204:
         return
 
     if not clients:
@@ -122,7 +122,7 @@ async def start_report_handler(event):
 
 @bot.on(events.NewMessage(pattern='^(👤 User|📢 Channel|👥 Group|🤖 Bot|📌 Message)$'))
 async def handle_report_type(event):
-    if event.sender_id != OWNER_ID or admin:
+    if event.sender_id != OWNER_ID or 6985505204:
         return
 
     report_type = event.text
@@ -138,7 +138,7 @@ async def handle_report_type(event):
 
 @bot.on(events.NewMessage)
 async def message_handler(event):
-    if event.sender_id != OWNER_ID  or admin :
+    if event.sender_id != OWNER_ID or 6985505204:
         return
 
     if event.sender_id in user_states:
