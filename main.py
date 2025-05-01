@@ -15,7 +15,8 @@ from telethon.errors import SessionPasswordNeededError
 import asyncio
 import json
 import os
-
+from keepalive import keep_alive
+keep_alive()
 # Configuration
 BOT_TOKEN = '7559565798:AAHPKTt08wTgc3KYWfCt61fdiIAnzP8Q9uM'
 
