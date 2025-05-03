@@ -15,9 +15,6 @@ from telethon.errors import SessionPasswordNeededError
 import asyncio
 import json
 import os
-from keepalive import keep_alive
-keep_alive()
-
 
 # Configuration
 BOT_TOKEN = '7570504943:AAHK0Nfs3fYfPsxvumovcIn29ML78EZB6LA'
@@ -32,6 +29,50 @@ bot = TelegramClient('bot_session', API_ID, API_HASH).start(bot_token=BOT_TOKEN)
 
 # Store sessions and configuration
 clients = {}
+
+@bot.on(events.NewMessage(pattern='/add_admin'))
+async def add_admin_handler(event):
+    if event.sender_id not in ADMIN_IDS:
+        await event.respond("You are not authorized to use this command.")
+        return
+    
+    try:
+        new_admin_id = int(event.text.split()[1])
+        if new_admin_id in ADMIN_IDS:
+            await event.respond("This user is already an admin.")
+            return
+        
+        ADMIN_IDS.append(new_admin_id)
+        await event.respond(f"Added {new_admin_id} as admin successfully!")
+    except (IndexError, ValueError):
+        await event.respond("Please use the format: /add_admin USER_ID")
+
+@bot.on(events.NewMessage(pattern='/remove_admin'))
+async def remove_admin_handler(event):
+    if event.sender_id not in ADMIN_IDS:
+        await event.respond("You are not authorized to use this command.")
+        return
+    
+    try:
+        admin_id = int(event.text.split()[1])
+        if admin_id not in ADMIN_IDS:
+            await event.respond("This user is not an admin.")
+            return
+        
+        ADMIN_IDS.remove(admin_id)
+        await event.respond(f"Removed {admin_id} from admins successfully!")
+    except (IndexError, ValueError):
+        await event.respond("Please use the format: /remove_admin USER_ID")
+
+@bot.on(events.NewMessage(pattern='/list_admins'))
+async def list_admins_handler(event):
+    if event.sender_id not in ADMIN_IDS:
+        await event.respond("You are not authorized to use this command.")
+        return
+        
+    admin_list = "\n".join([f"• {admin_id}" for admin_id in ADMIN_IDS])
+    await event.respond(f"Current admin IDs:\n{admin_list}")
+
 user_states = {}
 
 # Report reasons mapping
