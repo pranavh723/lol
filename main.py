@@ -18,7 +18,7 @@ import os
 from keepalive import keep_alive
 keep_alive()
 # Configuration
-BOT_TOKEN = '7559565798:AAHPKTt08wTgc3KYWfCt61fdiIAnzP8Q9uM'
+BOT_TOKEN = '7559565798:AAG_ea6b21yJA5a9b_neIUXmLzil_0qQBLo'
 
 OWNER_ID = 7913739894 or 6985505204
 
