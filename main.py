@@ -17,7 +17,7 @@ import json
 import os
 
 # Configuration
-BOT_TOKEN = '7570504943:AAHK0Nfs3fYfPsxvumovcIn29ML78EZB6LA'
+BOT_TOKEN = '7570504943:AAFZKVlTcugst0R3SXdBCluOsaUUSPeIMNM'
 
 # List of admin IDs
 ADMIN_IDS = [6985505204, 6935400972 ,6715519631] # Add more admin IDs here
